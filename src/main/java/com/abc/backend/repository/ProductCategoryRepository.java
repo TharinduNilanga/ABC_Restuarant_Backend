@@ -9,6 +9,6 @@ import org.springframework.stereotype.Repository;
 import com.abc.backend.model.ProductCategory;
 
 @Repository
-public interface ProductCategoryRepository extends MongoRepository <ProductCategory, ObjectId> {
+public interface ProductCategoryRepository extends MongoRepository <ProductCategory, Long> {
     Optional<ProductCategory> findByCategoryId(int categoryId);
 }

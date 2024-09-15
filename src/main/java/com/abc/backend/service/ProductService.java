@@ -16,27 +16,29 @@ public interface ProductService {
     public List<ProductCategory> allProductCategory();
 
     public ProductCategory addProductCategory(ProductCategory productCategory);
-    public Optional<ProductCategory> singleProductCategory(ObjectId id);
+
+    public Optional<ProductCategory> singleProductCategory(Long id);
 
     public Optional<ProductCategory> singleProductCategoryById(int categoryId);
 
-    public ProductCategory updateProductCategory(ObjectId id, ProductCategory productCategoryDetails);
+    public ProductCategory updateProductCategory(Long id, ProductCategory productCategoryDetails);
 
-    public void deleteProductCategory(ObjectId id);
+    public void deleteProductCategory(Long id);
 
     public List<Product> allProduct();
 
-    public Product addProduct(Product product, MultipartFile file) throws IOException;
+    public Product addProduct(Product product) throws IOException;
 
-    public Optional<Product> singleProduct(ObjectId id);
+    public Optional<Product> singleProduct(Long id);
 
-    public Product updateProduct(ObjectId id, Product productDetails);
+    public Product updateProduct(Long id, Product productDetails);
 
-    public void deleteProduct(ObjectId id);
+    public void deleteProduct(Long id);
 
     public List<Offer> allOffer();
 
     public Offer addOffer(Offer offer);
+
     public Optional<Offer> singleOffer(ObjectId id);
 
     public Offer updateOffer(ObjectId id, Offer offerDetails);

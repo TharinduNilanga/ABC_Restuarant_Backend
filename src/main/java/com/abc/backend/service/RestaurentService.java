@@ -14,11 +14,11 @@ public interface RestaurentService {
 
     public Restaurent addRestaurent(Restaurent restaurent);
 
-    public Optional<Restaurent> singleRestaurent(ObjectId id);
+    public Optional<Restaurent> singleRestaurent(Long id);
 
-    public Restaurent updateRestaurent(ObjectId id, Restaurent restaurentDetails);
+    public Restaurent updateRestaurent(Long id, Restaurent restaurentDetails);
 
-    public void deleteRestaurent(ObjectId id);
+    public void deleteRestaurent(Long id);
 
     public List<Facility> allFacilities();
 

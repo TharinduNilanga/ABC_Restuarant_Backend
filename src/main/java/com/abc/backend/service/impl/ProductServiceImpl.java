@@ -17,22 +17,27 @@ import com.abc.backend.repository.OfferRepository;
 import com.abc.backend.repository.ProductCategoryRepository;
 import com.abc.backend.repository.ProductRepository;
 import com.abc.backend.service.ProductService;
+import com.abc.backend.util.SequenceIdGen;
 
 @Service
-public class ProductServiceImpl implements ProductService{
+public class ProductServiceImpl implements ProductService {
 
     @Autowired
     private ProductCategoryRepository productCategoryRepository;
+
+    @Autowired
+    private SequenceIdGen sequenceIdGen;
 
     public List<ProductCategory> allProductCategory() {
         return productCategoryRepository.findAll();
     }
 
     public ProductCategory addProductCategory(ProductCategory productCategory) {
+        productCategory.setId(sequenceIdGen.generateSequence(ProductCategory.class.getSimpleName()));
         return productCategoryRepository.save(productCategory);
     }
 
-    public Optional<ProductCategory> singleProductCategory(ObjectId id) {
+    public Optional<ProductCategory> singleProductCategory(Long id) {
         return productCategoryRepository.findById(id);
     }
 
@@ -40,7 +45,7 @@ public class ProductServiceImpl implements ProductService{
         return productCategoryRepository.findByCategoryId(categoryId);
     }
 
-    public ProductCategory updateProductCategory(ObjectId id, ProductCategory productCategoryDetails) {
+    public ProductCategory updateProductCategory(Long id, ProductCategory productCategoryDetails) {
         Optional<ProductCategory> optionalProductCategory = productCategoryRepository.findById(id);
         if (optionalProductCategory.isPresent()) {
             ProductCategory productCategory = optionalProductCategory.get();
@@ -52,13 +57,13 @@ public class ProductServiceImpl implements ProductService{
         return null;
     }
 
-    public void deleteProductCategory(ObjectId id) {
+    public void deleteProductCategory(Long id) {
         productCategoryRepository.deleteById(id);
     }
 
     // ----------------------------------------------------------------------------
 
-    private final String UPLOAD_DIR = "C:/Users/madhusha/Downloads/uploads/"; 
+    private final String UPLOAD_DIR = "C:/Users/tharindu/Downloads/uploads/";
 
     @Autowired
     private ProductRepository productRepository;
@@ -67,35 +72,37 @@ public class ProductServiceImpl implements ProductService{
         return productRepository.findAll();
     }
 
-    public Product addProduct(Product product, MultipartFile file) throws IOException {
-        if (file != null && !file.isEmpty()) {
-            // Get the extension of the file
-            String extension = file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf(".") + 1);
+    public Product addProduct(Product product) throws IOException {
+        // if (file != null && !file.isEmpty()) {
+        // // Get the extension of the file
+        // String extension =
+        // file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf(".")
+        // + 1);
 
-            // Rename the file to productId + extension
-            String newFilename = product.getProductId() + "." + extension;
-            String filePath = UPLOAD_DIR + newFilename;
+        // // Rename the file to productId + extension
+        // String newFilename = product.getProductId() + "." + extension;
+        // String filePath = UPLOAD_DIR + newFilename;
 
-            // Save the file to the specified directory
-            File destinationFile = new File(filePath);
-            file.transferTo(destinationFile);
+        // // Save the file to the specified directory
+        // File destinationFile = new File(filePath);
+        // file.transferTo(destinationFile);
 
-            // Update the product's image field with only the extension
-            product.setProductImage(extension);
-        } else {
-            // If no file is provided, set the image field to an empty string
-            product.setProductImage("");
-        }
-
+        // // Update the product's image field with only the extension
+        // product.setProductImage(extension);
+        // } else {
+        // // If no file is provided, set the image field to an empty string
+        // product.setProductImage("");
+        // }
+        product.setProductId(sequenceIdGen.generateSequence(Product.class.getSimpleName()));
         // Save the product to the database
         return productRepository.save(product);
     }
 
-    public Optional<Product> singleProduct(ObjectId id) {
+    public Optional<Product> singleProduct(Long id) {
         return productRepository.findById(id);
     }
 
-    public Product updateProduct(ObjectId id, Product productDetails) {
+    public Product updateProduct(Long id, Product productDetails) {
         Optional<Product> optionalProduct = productRepository.findById(id);
         if (optionalProduct.isPresent()) {
             Product product = optionalProduct.get();
@@ -110,7 +117,7 @@ public class ProductServiceImpl implements ProductService{
         return null;
     }
 
-    public void deleteProduct(ObjectId id) {
+    public void deleteProduct(Long id) {
         productRepository.deleteById(id);
     }
 

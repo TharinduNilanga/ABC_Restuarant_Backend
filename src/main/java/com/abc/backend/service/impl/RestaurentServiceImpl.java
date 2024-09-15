@@ -33,17 +33,17 @@ public class RestaurentServiceImpl implements RestaurentService {
 
     @Override
     public Restaurent addRestaurent(Restaurent restaurent) {
-        // restaurent.setLocationId(sequenceIdGen.generateAndCreateObjectId(Restaurent.class.getSimpleName()));
+        restaurent.setLocationId(sequenceIdGen.generateSequence(Restaurent.class.getSimpleName()));
         return restaurentRepository.save(restaurent);
     }
 
     @Override
-    public Optional<Restaurent> singleRestaurent(ObjectId id) {
+    public Optional<Restaurent> singleRestaurent(Long id) {
         return restaurentRepository.findById(id);
     }
 
     @Override
-    public Restaurent updateRestaurent(ObjectId id, Restaurent restaurentDetails) {
+    public Restaurent updateRestaurent(Long id, Restaurent restaurentDetails) {
         return restaurentRepository.findById(id)
                 .map(restaurent -> {
                     restaurent.setLocationName(restaurentDetails.getLocationName());
@@ -58,7 +58,7 @@ public class RestaurentServiceImpl implements RestaurentService {
     }
 
     @Override
-    public void deleteRestaurent(ObjectId id) {
+    public void deleteRestaurent(Long id) {
         if (restaurentRepository.existsById(id)) {
             restaurentRepository.deleteById(id);
         } else {
@@ -76,6 +76,7 @@ public class RestaurentServiceImpl implements RestaurentService {
 
     @Override
     public Facility addFacility(Facility facility) {
+        facility.setFacilityId(sequenceIdGen.generateSequence(Facility.class.getSimpleName()));
         return facilityRepository.save(facility);
     }
 

@@ -27,7 +27,7 @@ import com.abc.backend.service.ProductService;
 
 @RestController
 @RequestMapping("/api")
-@CrossOrigin(origins = "*") 
+@CrossOrigin(origins = "*")
 public class ProductController {
 
     @Autowired
@@ -45,7 +45,8 @@ public class ProductController {
     }
 
     @GetMapping("/productCategory/{id}")
-    public ResponseEntity<Optional<ProductCategory>> singleProductCategory(@PathVariable ObjectId id) {
+    public ResponseEntity<Optional<ProductCategory>> singleProductCategory(@PathVariable Long id) {
+        System.out.println("call");
         Optional<ProductCategory> productCategory = productService.singleProductCategory(id);
         return new ResponseEntity<>(productCategory, HttpStatus.OK);
     }
@@ -57,7 +58,7 @@ public class ProductController {
     }
 
     @PutMapping("/productCategory/{id}")
-    public ResponseEntity<ProductCategory> updateProductCategory(@PathVariable ObjectId id,
+    public ResponseEntity<ProductCategory> updateProductCategory(@PathVariable Long id,
             @RequestBody ProductCategory productCategoryDetails) {
         ProductCategory updatedProductCategory = productService.updateProductCategory(id, productCategoryDetails);
         if (updatedProductCategory != null) {
@@ -68,7 +69,7 @@ public class ProductController {
     }
 
     @DeleteMapping("/productCategory/{id}")
-    public ResponseEntity<Void> deleteProductCategory(@PathVariable ObjectId id) {
+    public ResponseEntity<Void> deleteProductCategory(@PathVariable Long id) {
         productService.deleteProductCategory(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
@@ -81,21 +82,19 @@ public class ProductController {
     }
 
     @PostMapping("/product/addProduct")
-    public ResponseEntity<Product> addProduct(
-            @RequestPart("product") Product product,
-            @RequestPart(value = "file", required = false) MultipartFile file) throws IOException {
-            Product newProduct = productService.addProduct(product, file);
-            return new ResponseEntity<>(newProduct, HttpStatus.CREATED);
+    public ResponseEntity<Product> addProduct(@RequestBody Product product) throws IOException {
+        Product newProduct = productService.addProduct(product );
+        return new ResponseEntity<>(newProduct, HttpStatus.CREATED);
     }
 
     @GetMapping("/product/{id}")
-    public ResponseEntity<Optional<Product>> singleProduct(@PathVariable ObjectId id) {
+    public ResponseEntity<Optional<Product>> singleProduct(@PathVariable Long id) {
         Optional<Product> product = productService.singleProduct(id);
         return new ResponseEntity<>(product, HttpStatus.OK);
     }
 
     @PutMapping("/product/{id}")
-    public ResponseEntity<Product> updateProduct(@PathVariable ObjectId id, @RequestBody Product productDetails) {
+    public ResponseEntity<Product> updateProduct(@PathVariable Long id, @RequestBody Product productDetails) {
         Product updatedProduct = productService.updateProduct(id, productDetails);
         if (updatedProduct != null) {
             return new ResponseEntity<>(updatedProduct, HttpStatus.OK);
@@ -105,7 +104,7 @@ public class ProductController {
     }
 
     @DeleteMapping("/product/{id}")
-    public ResponseEntity<Void> deleteProduct(@PathVariable ObjectId id) {
+    public ResponseEntity<Void> deleteProduct(@PathVariable Long id) {
         productService.deleteProduct(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }

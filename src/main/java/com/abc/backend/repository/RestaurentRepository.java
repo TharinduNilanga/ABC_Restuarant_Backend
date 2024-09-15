@@ -7,6 +7,6 @@ import org.springframework.stereotype.Repository;
 import com.abc.backend.model.Restaurent;
 
 @Repository
-public interface RestaurentRepository extends MongoRepository <Restaurent, ObjectId> {
+public interface RestaurentRepository extends MongoRepository <Restaurent, Long> {
 
 }

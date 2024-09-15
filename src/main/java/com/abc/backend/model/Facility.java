@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 public class Facility {
     @Id
     private String id;
-    private int facilityId;
+    private long facilityId;
     private String facilityName;
     private String facilityDescription;
 }

@@ -7,6 +7,6 @@ import org.springframework.stereotype.Repository;
 import com.abc.backend.model.Product;
 
 @Repository
-public interface ProductRepository extends MongoRepository <Product, ObjectId> {
+public interface ProductRepository extends MongoRepository <Product, Long> {
 
 }

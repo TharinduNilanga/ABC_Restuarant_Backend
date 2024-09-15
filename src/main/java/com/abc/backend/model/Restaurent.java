@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Restaurent {
     @Id
-    private ObjectId locationId;
+    private Long locationId;
     private String locationName;
     private String locationAddress;
     private String locationCity;

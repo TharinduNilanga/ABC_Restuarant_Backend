@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class ProductCategory {
     @Id
-    private ObjectId id;
+    private Long id;
     private int categoryId;
     private String categoryName;
     private String categoryDescription;

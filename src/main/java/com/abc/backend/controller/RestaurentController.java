@@ -45,7 +45,7 @@ public class RestaurentController {
     }
 
     @GetMapping("/restaurent/{id}")
-    public ResponseEntity<Optional<Restaurent>> singleRestaurent(@PathVariable ObjectId id) {
+    public ResponseEntity<Optional<Restaurent>> singleRestaurent(@PathVariable Long id) {
         Optional<Restaurent> restaurent = restaurentService.singleRestaurent(id);
         return restaurent.isPresent() ? 
             new ResponseEntity<>(restaurent, HttpStatus.OK) : 
@@ -53,7 +53,7 @@ public class RestaurentController {
     }
 
     @PutMapping("/restaurent/{id}")
-    public ResponseEntity<Restaurent> updateRestaurent(@PathVariable ObjectId id,
+    public ResponseEntity<Restaurent> updateRestaurent(@PathVariable Long id,
             @RequestBody Restaurent restaurentDetails) {
         Restaurent updatedRestaurent = restaurentService.updateRestaurent(id, restaurentDetails);
         return updatedRestaurent != null ? 
@@ -62,7 +62,7 @@ public class RestaurentController {
     }
 
     @DeleteMapping("/restaurent/{id}")
-    public ResponseEntity<Void> deleteRestaurent(@PathVariable ObjectId id) {
+    public ResponseEntity<Void> deleteRestaurent(@PathVariable Long id) {
         restaurentService.deleteRestaurent(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }

@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Product {
     @Id
-    private String productId;
+    private Long productId;
     private String productName;
     private String productDescription;
     private String productImage;
